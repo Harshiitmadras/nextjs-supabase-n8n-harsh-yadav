@@ -1,0 +1,75 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "supabase-signup",
+        "responseMode": "onReceived",
+        "responseData": "={{ { success: true } }}"
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@yourdomain.com",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "Welcome to the app, {{$json[\"name\"] || \"User\"}}!",
+        "html": "<html><body><h1 style='font-family:Arial,sans-serif;color:#0b74ff;'>Welcome, {{$json[\"name\"] || \"User\"}}!</h1><p>Thanks for creating an account. We're excited to have you aboard.</p><p><strong>Getting started</strong></p><ol><li>Visit your dashboard</li><li>Update your profile</li></ol><p>\u2014 Team</p></body></html>"
+      },
+      "name": "Send Email (HTML)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "sheetId": "YOUR_GOOGLE_SHEET_ID",
+        "range": "Sheet1",
+        "valueInputMode": "USER_ENTERED",
+        "options": {},
+        "data": [
+          [
+            "={{$json[\"email\"]}}",
+            "={{$json[\"name\"]}}",
+            "={{$json[\"supabase_user\"]}}",
+            "={{$json[\"created_at\"]}}"
+          ]
+        ]
+      },
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [
+        500,
+        480
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Send Email (HTML)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
