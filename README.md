@@ -8,7 +8,7 @@ and a post-signup n8n webhook trigger. The dashboard explicitly shows "Welcome, 
 - Google OAuth login (Supabase OAuth provider)
 - Signup posts data to an n8n webhook (if configured)
 - Protected Dashboard showing "Welcome, Harsh Yadav"
-- Minimal, clean UI (Option A)
+- Advanced, clean UI
 
 ## Setup (local)
 
@@ -37,15 +37,10 @@ npm run dev
 # open http://localhost:3000
 ```
 
-## Deploy to Vercel
-1. Push to GitHub.
-2. Import repository in Vercel, set environment variables (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_N8N_WEBHOOK_URL).
-3. Set OAuth Redirect URL in Supabase to your Vercel URL.
-4. Deploy.
 
 ## n8n workflow (HTML email)
 Import `n8n_workflow.json`. The Send Email node uses an HTML template for a nicer welcome email.
 
 ## Notes
-- This project uses the Supabase anon key in the client for simplicity (standard for demos). For production, review security rules.
+- This project uses the Supabase anon key in the client for simplicity.
 - The dashboard text "Welcome, Harsh Yadav" is intentionally static per request.
