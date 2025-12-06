@@ -1,6 +1,6 @@
 # Next.js + Supabase Auth + n8n (Welcome Harsh Yadav)
 
-This project is a minimal Next.js app with Sign Up / Login using Supabase Auth,
+This project is a Next.js app with Sign Up / Login using Supabase Auth,
 and a post-signup n8n webhook trigger. The dashboard explicitly shows "Welcome, Harsh Yadav".
 
 ## Features
